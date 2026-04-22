@@ -3,8 +3,8 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { EASE_OUT_SOFT } from "@/motion/constants";
 
 const SESSION_KEY = "ryskex-intro-played";
-const DURATION_MS = 900;
-const REDUCED_DURATION_MS = 350;
+const DURATION_MS = 600;
+const REDUCED_DURATION_MS = 280;
 
 export default function Intro() {
   const reduce = useReducedMotion();
@@ -53,67 +53,92 @@ export default function Intro() {
           aria-label="RYSKEX intro"
           aria-modal="true"
           onClick={skip}
-          className="fixed inset-0 z-[100] cursor-pointer overflow-hidden bg-[#040711]"
+          className="fixed inset-0 z-[100] flex cursor-pointer items-center justify-center overflow-hidden bg-[#040711]"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: reduce ? 0.15 : 0.28, ease: EASE_OUT_SOFT }}
+          exit={{ opacity: 0, scale: 1.03, filter: "blur(6px)" }}
+          transition={{ duration: reduce ? 0.18 : 0.26, ease: EASE_OUT_SOFT }}
           style={{ WebkitTapHighlightColor: "transparent" }}
         >
-          {/* Soft cobalt halo behind the logo — ties the logo to the header's pill glow */}
+          {/* Deep radial cobalt bloom — cinematic backdrop */}
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 55% 40% at 50% 50%, rgba(59,114,222,0.45) 0%, rgba(59,114,222,0.12) 35%, transparent 65%)",
+            }}
+            initial={{ opacity: 0, scale: 0.82 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: reduce ? 0.2 : 0.34, ease: EASE_OUT_SOFT }}
+          />
+
+          {/* Fine grid texture for depth — fades with the bloom */}
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.12) 1px, transparent 1px)",
+              backgroundSize: "80px 80px",
+              maskImage:
+                "radial-gradient(ellipse 60% 45% at 50% 50%, black 0%, transparent 75%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 60% 45% at 50% 50%, black 0%, transparent 75%)",
+              opacity: 0.08,
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.08 }}
+            transition={{ duration: reduce ? 0.15 : 0.3, ease: EASE_OUT_SOFT }}
+          />
+
+          {/* Tight logo halo — white lift behind the dark-on-light logo */}
           <motion.div
             aria-hidden
             className="pointer-events-none absolute"
             style={{
-              top: 28,
-              left: 24,
-              width: 200,
-              height: 72,
+              width: 360,
+              height: 120,
               background:
-                "radial-gradient(60% 140% at 50% 50%, rgba(59,114,222,0.45) 0%, rgba(59,114,222,0.12) 45%, transparent 75%)",
-              filter: "blur(14px)",
+                "radial-gradient(55% 90% at 50% 50%, rgba(255,255,255,0.22) 0%, rgba(122,167,246,0.10) 45%, transparent 75%)",
+              filter: "blur(18px)",
             }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: reduce ? 0.1 : 0.25, ease: EASE_OUT_SOFT }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: reduce ? 0.18 : 0.32, ease: EASE_OUT_SOFT }}
           />
 
-          {/* The header logo — matches Wordmark's inverted styling + position */}
+          {/* The logo — centered, slightly larger than header for presence */}
           <motion.div
-            className="absolute"
-            style={{ top: 44, left: 28 }}
-            initial={{ opacity: 0, x: reduce ? 0 : -8 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: reduce ? 0.2 : 0.42, ease: EASE_OUT_SOFT }}
+            className="relative z-10 flex flex-col items-center gap-3"
+            initial={{ opacity: 0, scale: 1.08, filter: reduce ? "blur(0px)" : "blur(6px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            transition={{ duration: reduce ? 0.22 : 0.38, ease: EASE_OUT_SOFT }}
           >
             <img
               src="/riskex-logo.svg"
               alt="RYSKEX"
-              width={240}
-              height={48}
-              className="block h-7 w-auto select-none invert md:h-8"
+              width={420}
+              height={84}
+              className="block h-12 w-auto select-none invert md:h-16"
               draggable={false}
+              style={{ filter: "drop-shadow(0 2px 24px rgba(59,114,222,0.45))" }}
             />
-          </motion.div>
 
-          {/* Hairline cobalt sweep — subtle motion cue */}
-          {!reduce && (
-            <motion.div
-              aria-hidden
-              className="pointer-events-none absolute"
-              style={{
-                top: 84,
-                left: 28,
-                height: 1,
-                width: 140,
-                background:
-                  "linear-gradient(90deg, #3B72DE 0%, #2EC46E 60%, transparent 100%)",
-                transformOrigin: "left center",
-              }}
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 0.7 }}
-              transition={{ duration: 0.4, delay: 0.18, ease: EASE_OUT_SOFT }}
-            />
-          )}
+            {/* Cobalt→green hairline signature */}
+            {!reduce && (
+              <motion.div
+                aria-hidden
+                className="h-px w-28 md:w-40"
+                style={{
+                  background:
+                    "linear-gradient(90deg, transparent 0%, #3B72DE 35%, #2EC46E 65%, transparent 100%)",
+                }}
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 0.8 }}
+                transition={{ duration: 0.28, delay: 0.22, ease: EASE_OUT_SOFT }}
+              />
+            )}
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
