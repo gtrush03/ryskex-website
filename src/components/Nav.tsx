@@ -19,6 +19,52 @@ export default function Nav() {
   const lastY = useRef(0);
   const ticking = useRef(false);
 
+  // Refs for the mobile menu trigger + dialog — used for focus-trap + return-focus.
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+
+  // Focus trap + ESC + return focus for the mobile menu dialog.
+  useEffect(() => {
+    if (!open) return;
+
+    // Move focus into the dialog (first focusable element).
+    const dialog = dialogRef.current;
+    const firstLink = dialog?.querySelector<HTMLElement>(
+      'a, button, [tabindex]:not([tabindex="-1"])'
+    );
+    firstLink?.focus();
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab" || !dialog) return;
+      const focusables = dialog.querySelectorAll<HTMLElement>(
+        'a, button, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      // Return focus to the trigger when the dialog closes.
+      triggerRef.current?.focus();
+    };
+  }, [open]);
+
   useEffect(() => {
     const isDesktop = () =>
       typeof window !== "undefined" &&
@@ -113,18 +159,26 @@ export default function Nav() {
             <ArrowRight size={13} strokeWidth={2} />
           </Link>
           <button
+            ref={triggerRef}
             onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
+            aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
+            aria-controls="mobile-nav-menu"
+            aria-haspopup="dialog"
             className="inline-flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:text-text md:hidden"
           >
-            {open ? <X size={18} /> : <Menu size={18} />}
+            {open ? <X size={18} aria-hidden /> : <Menu size={18} aria-hidden />}
           </button>
         </div>
       </header>
 
       {open && (
         <div
+          id="mobile-nav-menu"
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation"
           className="glass absolute left-3 right-3 top-[calc(100%+12px)] rounded-2xl p-4 shadow-[0_16px_48px_-16px_rgba(0,0,0,0.6),0_0_0_1px_var(--accent-ring)] md:hidden"
           style={{
             background:

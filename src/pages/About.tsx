@@ -94,6 +94,8 @@ export default function About() {
                     alt={current.kicker}
                     loading="lazy"
                     decoding="async"
+                    width={720}
+                    height={720}
                     className="h-full w-full object-cover"
                   />
                   <div

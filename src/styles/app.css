@@ -48,8 +48,48 @@ body {
 
 :focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* ── Screen-reader only (visually hidden, still focusable) ───── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ── Skip-to-content link ────────────────────────────────────── */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 10px 28px -8px rgba(59, 114, 222, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transform: translateY(-200%);
+  transition: transform 180ms var(--ease);
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 /* ── Utilities ─────────────────────────────────────────────── */
@@ -806,4 +846,80 @@ body {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   letter-spacing: 0.08em;
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   γ3 cross-browser polish pass — additive only
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* Safari + older-engine fallback for background-clip: text.
+   When unsupported, gradient text would render invisible (transparent fill on
+   transparent background), so fall back to the solid accent color. */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .text-gradient {
+    color: var(--accent);
+    background-image: none;
+  }
+  .shimmer {
+    color: var(--text);
+    background-image: none;
+  }
+}
+
+/* Safari requires -webkit-text-fill-color to expose the clipped gradient when
+   the element has its own color. Pairs with the existing background-clip rule. */
+.text-gradient {
+  -webkit-text-fill-color: transparent;
+}
+
+/* Fallback when backdrop-filter is unsupported (older Firefox, some embedded
+   webviews). Replace the translucent glass with a near-opaque surface so copy
+   stays readable instead of bleeding through to the underlying ambient art. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass,
+  .glass-warm,
+  .glass-cold {
+    background:
+      linear-gradient(180deg, var(--glass-top-highlight) 0%, rgba(243, 239, 230, 0.015) 100%),
+      rgba(13, 18, 32, 0.94);
+  }
+  .glass-deep {
+    background:
+      linear-gradient(180deg, var(--glass-top-highlight) 0%, rgba(59, 114, 222, 0.04) 100%),
+      rgba(11, 16, 28, 0.96);
+  }
+  .founder-card {
+    background:
+      linear-gradient(180deg, rgba(244,245,248,0.04) 0%, rgba(244,245,248,0.015) 100%),
+      rgba(13, 18, 32, 0.94);
+  }
+  .light .glass,
+  .light .glass-warm,
+  .light .glass-cold,
+  .light .glass-deep {
+    background:
+      linear-gradient(180deg, var(--glass-top-highlight) 0%, rgba(255,255,255,0.02) 100%),
+      rgba(255, 255, 255, 0.96);
+  }
+}
+
+/* Clip decorative .orb blurs so they never expand document scrollWidth on
+   narrow viewports. Ambient sections are visually self-contained; orbs are
+   positioned absolute relative to them, but without overflow clipping on the
+   section these >400px blurred ellipses push past the viewport edge and
+   trigger horizontal scroll on 320–360px devices. */
+.section-ambient {
+  overflow: hidden;
+}
+
+/* Defensive: ensure root containers never allow horizontal scrollbars even if
+   a single descendant overflows. No visual effect at 1440 — only kicks in if
+   a child would otherwise push past the viewport. */
+html,
+body {
+  overflow-x: hidden;
+}
+main,
+.min-h-screen {
+  min-width: 0;
 }

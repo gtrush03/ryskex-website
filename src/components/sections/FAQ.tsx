@@ -47,6 +47,8 @@ export default function FAQ() {
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
                   aria-expanded={isOpen}
+                  aria-controls={`faq-panel-${i}`}
+                  id={`faq-trigger-${i}`}
                   className={`${isOpen ? "glass-deep" : "glass"} relative w-full rounded-2xl p-6 text-left transition-all md:p-7`}
                   style={{
                     boxShadow: isOpen
@@ -73,12 +75,15 @@ export default function FAQ() {
                           : "none",
                       }}
                     >
-                      {isOpen ? <Minus size={14} strokeWidth={2} /> : <Plus size={14} strokeWidth={2} />}
+                      {isOpen ? <Minus size={14} strokeWidth={2} aria-hidden /> : <Plus size={14} strokeWidth={2} aria-hidden />}
                     </span>
                   </div>
                   <AnimatePresence initial={false}>
                     {isOpen && (
                       <motion.div
+                        id={`faq-panel-${i}`}
+                        role="region"
+                        aria-labelledby={`faq-trigger-${i}`}
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}

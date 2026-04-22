@@ -71,6 +71,8 @@ export default function Team() {
                     alt={m.name}
                     loading="lazy"
                     decoding="async"
+                    width={480}
+                    height={600}
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     style={{ filter: "grayscale(1) contrast(1.05)" }}
                   />
@@ -79,6 +81,10 @@ export default function Team() {
                     src={m.image}
                     alt=""
                     aria-hidden
+                    loading="lazy"
+                    decoding="async"
+                    width={480}
+                    height={600}
                     className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   />
                   <div
