@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B0C0E" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F4EFE4" media="(prefers-color-scheme: light)" />
+
+    <title>RYSKEX — Institutional Parametric Risk Exchange</title>
+    <meta name="description" content="Parametric risk exchange for captives, cedents and institutional capital. Triggers price on VUCAWRI. Settlement clears in 48 hours on Redbelly. Veritas ex Machina." />
+
+    <meta property="og:title" content="RYSKEX — Veritas ex Machina. An institutional parametric risk exchange." />
+    <meta property="og:description" content="Parametric risk, priced by machine, settled on-chain in 48 hours. Lloyd's Lab alumnus. ESCP Business School research affiliation. Vermont sponsored cells." />
+
+    <link rel="icon" type="image/svg+xml" href="/seal.svg" />
+
+    <script>
+      // Dark-first. Apply saved theme class before paint to avoid flash.
+      (function () {
+        try {
+          var saved = localStorage.getItem("ryskex-theme");
+          if (saved === "light") document.documentElement.classList.add("light");
+          document.documentElement.style.colorScheme = saved === "light" ? "light" : "dark";
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

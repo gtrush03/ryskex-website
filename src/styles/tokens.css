@@ -1,0 +1,198 @@
+/* RYSKEX tokens v5 — palette derived directly from the wordmark.
+   Cobalt-blue letters + chain-link green dots → the brand's two real hues.
+   Dark-first, premium, glassmorphic. Light mode supported via .light toggle. */
+
+:root {
+  /* Dark mode defaults */
+  --bg: #070B14;
+  --surface: #0D1220;
+  --surface-2: #141A2B;
+  --surface-glow: rgba(20, 28, 56, 0.62);   /* cobalt-tinted deeper card surface */
+  --text: #F4F5F8;
+  --muted: #9AA1B2;
+  --subtle: #5B6377;
+  /* softer borders (alpha-based) so nothing reads as a hard seam */
+  --border: rgba(244, 245, 248, 0.08);
+  --border-strong: rgba(244, 245, 248, 0.14);
+
+  /* PRIMARY accent = cobalt blue from the wordmark letters */
+  --accent: #3B72DE;            /* brighter on dark */
+  --accent-hover: #5288F0;
+  --accent-soft: rgba(59, 114, 222, 0.14);
+  --accent-ring: rgba(59, 114, 222, 0.32);
+  --accent-fg: #070B14;
+  --accent-deep: #1D4A9A;       /* logo's literal hex */
+
+  /* SECONDARY accent = green from the chain-link dots */
+  --accent-2: #2EC46E;          /* brighter on dark */
+  --accent-2-hover: #3FD582;
+  --accent-2-soft: rgba(46, 196, 110, 0.14);
+  --accent-2-deep: #20A038;     /* logo's literal hex */
+
+  /* Glass surfaces — tinted toward deep navy */
+  --glass: rgba(13, 18, 32, 0.58);
+  --glass-deep: rgba(11, 16, 28, 0.72);
+  --glass-warm: rgba(59, 114, 222, 0.08);
+  --glass-cold: rgba(46, 196, 110, 0.06);
+  --glass-border: rgba(244, 245, 248, 0.07);
+  --glass-border-hover: rgba(59, 114, 222, 0.45);
+  --glass-top-highlight: rgba(244, 245, 248, 0.09);
+  --glass-bottom-shadow: rgba(0, 0, 0, 0.32);
+
+  /* Ambient mesh blobs — blue + green + deeper blue */
+  --mesh-1: rgba(59, 114, 222, 0.18);
+  --mesh-2: rgba(46, 196, 110, 0.14);
+  --mesh-3: rgba(29, 74, 154, 0.22);
+  --mesh-4: rgba(82, 136, 240, 0.12);
+  --mesh-5: rgba(63, 213, 130, 0.10);
+
+  /* Gradients — brand blue→green */
+  --gradient-hero:
+    radial-gradient(at 18% 22%, rgba(59, 114, 222, 0.18) 0%, transparent 50%),
+    radial-gradient(at 82% 78%, rgba(46, 196, 110, 0.14) 0%, transparent 55%),
+    radial-gradient(at 50% 110%, rgba(29, 74, 154, 0.22) 0%, transparent 60%);
+  --gradient-brand: linear-gradient(135deg, #1D4A9A 0%, #3B72DE 40%, #2EC46E 100%);
+  --gradient-brand-soft: linear-gradient(135deg, rgba(29, 74, 154, 0.28) 0%, rgba(59, 114, 222, 0.24) 40%, rgba(46, 196, 110, 0.20) 100%);
+  --gradient-text: linear-gradient(92deg, #3B72DE 0%, #5288F0 40%, #2EC46E 100%);
+  --gradient-border:
+    linear-gradient(135deg, rgba(59, 114, 222, 0.55) 0%, rgba(46, 196, 110, 0.35) 50%, rgba(244, 245, 248, 0.04) 100%);
+  --gradient-border-lit:
+    linear-gradient(135deg, rgba(82, 136, 240, 0.70) 0%, rgba(63, 213, 130, 0.50) 45%, rgba(244, 245, 248, 0.06) 100%);
+  --gradient-surface-tint: linear-gradient(180deg, rgba(59, 114, 222, 0.04) 0%, transparent 60%);
+  --gradient-glow-orb-blue: radial-gradient(closest-side, rgba(59, 114, 222, 0.55), transparent 72%);
+  --gradient-glow-orb-green: radial-gradient(closest-side, rgba(46, 196, 110, 0.40), transparent 72%);
+  --gradient-badge-rim: linear-gradient(135deg, rgba(82, 136, 240, 0.50), rgba(63, 213, 130, 0.35) 55%, rgba(244, 245, 248, 0.06));
+  --gradient-chart-fill: linear-gradient(180deg, rgba(59, 114, 222, 0.28) 0%, rgba(46, 196, 110, 0.08) 100%);
+
+  /* Luminous text shadow — lit-from-within display type */
+  --text-shadow-lit: 0 4px 40px rgba(3, 6, 12, 0.6);
+
+  /* Feedback */
+  --ok: #2EC46E;
+  --warn: #E8B259;
+  --err: #E95D6A;
+
+  /* Fonts — Instrument Serif + Geist + Geist Mono */
+  --font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Geist Variable", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --tracking-tight: -0.025em;
+  --tracking-display: -0.025em;
+  --tracking-eyebrow: 0.14em;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --fast: 120ms;
+  --normal: 200ms;
+  --slow: 360ms;
+
+  /* Layout */
+  --container-max: 1360px;
+  --container-text: 760px;
+  --container-reading: 680px;
+  --gutter: 32px;
+  --rail: 72px;
+
+  /* Fibonacci-ish spacing */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-5: 20px;
+  --s-8: 32px;
+  --s-13: 52px;
+  --s-21: 84px;
+  --s-34: 136px;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 8px 20px -8px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 24px 60px -28px rgba(0, 0, 0, 0.55), 0 2px 8px -3px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 0 6px rgba(59, 114, 222, 0.14);
+  --shadow-glow-green: 0 0 0 6px rgba(46, 196, 110, 0.14);
+  --glass-shadow: inset 0 1px 0 rgba(244, 245, 248, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.30), 0 24px 60px -28px rgba(0, 0, 0, 0.55), 0 2px 8px -3px rgba(0, 0, 0, 0.35);
+
+  /* Section bleed — seamless transitions */
+  --bleed-dark: #070B14;       /* matches --bg in dark */
+  --bleed-height: 160px;        /* tall enough to feather, short enough not to eat content */
+}
+
+/* Light mode */
+html.light {
+  --bg: #F7F8FB;
+  --surface: #FFFFFF;
+  --surface-2: #EEF1F7;
+  --surface-glow: rgba(220, 230, 246, 0.72);
+  --text: #0A0F1E;
+  --muted: #4B5568;
+  --subtle: #8891A5;
+  --border: rgba(10, 15, 30, 0.08);
+  --border-strong: rgba(10, 15, 30, 0.14);
+
+  --accent: #1D4A9A;
+  --accent-hover: #163A7D;
+  --accent-soft: rgba(29, 74, 154, 0.08);
+  --accent-ring: rgba(29, 74, 154, 0.22);
+  --accent-fg: #FFFFFF;
+  --accent-deep: #0F356E;
+
+  --accent-2: #20A038;
+  --accent-2-hover: #198C2E;
+  --accent-2-soft: rgba(32, 160, 56, 0.08);
+  --accent-2-deep: #14792A;
+
+  --glass: rgba(255, 255, 255, 0.6);
+  --glass-warm: rgba(29, 74, 154, 0.04);
+  --glass-cold: rgba(32, 160, 56, 0.04);
+  --glass-border: rgba(10, 15, 30, 0.10);
+  --glass-border-hover: rgba(29, 74, 154, 0.45);
+  --glass-top-highlight: rgba(255, 255, 255, 0.7);
+  --glass-bottom-shadow: rgba(0, 0, 0, 0.06);
+
+  --mesh-1: rgba(29, 74, 154, 0.14);
+  --mesh-2: rgba(32, 160, 56, 0.10);
+  --mesh-3: rgba(15, 53, 110, 0.10);
+
+  --gradient-text: linear-gradient(92deg, #1D4A9A 0%, #3B72DE 40%, #20A038 100%);
+  --gradient-border:
+    linear-gradient(135deg, rgba(29, 74, 154, 0.55) 0%, rgba(32, 160, 56, 0.35) 50%, rgba(10, 15, 30, 0.04) 100%);
+  --gradient-border-lit:
+    linear-gradient(135deg, rgba(29, 74, 154, 0.65) 0%, rgba(32, 160, 56, 0.45) 50%, rgba(10, 15, 30, 0.06) 100%);
+  --gradient-brand-soft: linear-gradient(135deg, rgba(29, 74, 154, 0.14) 0%, rgba(59, 114, 222, 0.12) 40%, rgba(32, 160, 56, 0.12) 100%);
+  --gradient-glow-orb-blue: radial-gradient(closest-side, rgba(29, 74, 154, 0.28), transparent 72%);
+  --gradient-glow-orb-green: radial-gradient(closest-side, rgba(32, 160, 56, 0.22), transparent 72%);
+  --gradient-badge-rim: linear-gradient(135deg, rgba(29, 74, 154, 0.45), rgba(32, 160, 56, 0.30) 55%, rgba(10, 15, 30, 0.06));
+  --gradient-chart-fill: linear-gradient(180deg, rgba(29, 74, 154, 0.16) 0%, rgba(32, 160, 56, 0.06) 100%);
+  --mesh-4: rgba(29, 74, 154, 0.10);
+  --mesh-5: rgba(32, 160, 56, 0.08);
+
+  --text-shadow-lit: none;
+
+  --glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -1px 0 rgba(0, 0, 0, 0.04), 0 24px 60px -28px rgba(30, 30, 30, 0.16), 0 2px 8px -3px rgba(0, 0, 0, 0.06);
+  --glass-deep: rgba(255, 255, 255, 0.78);
+
+  /* Section bleed — pale equivalent for light mode */
+  --bleed-dark: #F7F8FB;
+}
+
+html {
+  transition: background-color 240ms var(--ease), color 240ms var(--ease);
+  color-scheme: dark;
+}
+html.light { color-scheme: light; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
