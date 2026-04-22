@@ -4,6 +4,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import ScrollProgress from "./motion/ScrollProgress";
 import RouteSuspense from "./components/RouteSuspense";
+import Intro from "./components/Intro";
 // Eager import — the fallback must be available even if a route chunk fails.
 import ErrorBoundary from "./components/ErrorBoundary";
 
@@ -19,6 +20,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 export default function App() {
   return (
     <div className="relative min-h-screen bg-bg text-text">
+      <Intro />
       <a href="#main" className="skip-link">Skip to main content</a>
       <ScrollProgress />
       <Nav />
