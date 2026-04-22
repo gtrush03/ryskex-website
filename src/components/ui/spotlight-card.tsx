@@ -3,6 +3,8 @@ import { useEffect, useRef, type ReactNode, type CSSProperties } from "react";
 // GlowCard — cursor-tracking spotlight card with a glow border.
 // Adapted from the 21st.dev / Aceternity-style spotlight pattern.
 // Uses CSS custom props --x/--xp/--y/--yp set from pointermove for smooth tracking.
+// Pointer reads are coalesced via requestAnimationFrame so we never write style
+// more than once per frame — keeps hover tracking crisp under load.
 
 interface GlowCardProps {
   children?: ReactNode;
@@ -38,17 +40,35 @@ export function GlowCard({
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const syncPointer = (e: PointerEvent) => {
-      const { clientX: x, clientY: y } = e;
+    let rafId = 0;
+    let pendingX = 0;
+    let pendingY = 0;
+    let pending = false;
+
+    const flush = () => {
       const el = cardRef.current;
-      if (!el) return;
-      el.style.setProperty("--x", x.toFixed(2));
-      el.style.setProperty("--xp", (x / window.innerWidth).toFixed(3));
-      el.style.setProperty("--y", y.toFixed(2));
-      el.style.setProperty("--yp", (y / window.innerHeight).toFixed(3));
+      if (el) {
+        el.style.setProperty("--x", pendingX.toFixed(2));
+        el.style.setProperty("--xp", (pendingX / window.innerWidth).toFixed(3));
+        el.style.setProperty("--y", pendingY.toFixed(2));
+        el.style.setProperty("--yp", (pendingY / window.innerHeight).toFixed(3));
+      }
+      pending = false;
     };
-    document.addEventListener("pointermove", syncPointer);
-    return () => document.removeEventListener("pointermove", syncPointer);
+
+    const syncPointer = (e: PointerEvent) => {
+      pendingX = e.clientX;
+      pendingY = e.clientY;
+      if (pending) return;
+      pending = true;
+      rafId = requestAnimationFrame(flush);
+    };
+
+    document.addEventListener("pointermove", syncPointer, { passive: true });
+    return () => {
+      document.removeEventListener("pointermove", syncPointer);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const { base, spread } = glowColorMap[glowColor];
@@ -67,11 +87,13 @@ export function GlowCard({
     "--border-size": "calc(var(--border, 1.5) * 1px)",
     "--spotlight-size": "calc(var(--size, 220) * 1px)",
     "--hue": "calc(var(--base) + (var(--xp, 0) * var(--spread, 0)))",
+    // Fill spotlight uses a theme-driven alpha (see style tag below) so the
+    // inner glow stays crisp in light mode and ambient in dark.
     backgroundImage: `radial-gradient(
       var(--spotlight-size) var(--spotlight-size) at
       calc(var(--x, 0) * 1px)
       calc(var(--y, 0) * 1px),
-      hsl(var(--hue, 210) 80% 60% / 0.14), transparent
+      hsl(var(--hue, 210) 80% 60% / var(--glow-fill-alpha, 0.14)), transparent
     )`,
     backgroundColor: "var(--backdrop, transparent)",
     backgroundSize:
@@ -85,7 +107,24 @@ export function GlowCard({
     ...(height !== undefined ? { height: typeof height === "number" ? `${height}px` : height } : {}),
   };
 
+  // Per-theme tuning:
+  //   dark  — ambient bloom: ~0.9 rim, 0.7 white halo, spotlight 280, fill 0.14
+  //   light — crisper rim:   1.0 rim, 0.5 white halo, spotlight 220, fill 0.22
+  //           (smaller radius + higher opacity so it reads against the pale bg)
   const styleTag = `
+    [data-glow] {
+      --glow-fill-alpha: 0.14;
+      --glow-rim-alpha: 0.9;
+      --glow-white-alpha: 0.7;
+      --glow-rim-size-scale: 0.75;
+    }
+    :where(.light) [data-glow] {
+      --glow-fill-alpha: 0.22;
+      --glow-rim-alpha: 1;
+      --glow-white-alpha: 0.5;
+      --glow-rim-size-scale: 0.6;
+      --size: 220;
+    }
     [data-glow]::before,
     [data-glow]::after {
       pointer-events: none;
@@ -104,19 +143,30 @@ export function GlowCard({
     }
     [data-glow]::before {
       background-image: radial-gradient(
-        calc(var(--spotlight-size) * 0.75) calc(var(--spotlight-size) * 0.75) at
+        calc(var(--spotlight-size) * var(--glow-rim-size-scale)) calc(var(--spotlight-size) * var(--glow-rim-size-scale)) at
         calc(var(--x, 0) * 1px)
         calc(var(--y, 0) * 1px),
-        hsl(var(--hue, 210) 85% 65% / 0.9), transparent 100%
+        hsl(var(--hue, 210) 85% 65% / var(--glow-rim-alpha, 0.9)), transparent 100%
       );
       filter: brightness(1.8);
+    }
+    :where(.light) [data-glow]::before {
+      /* In light mode the brand blue is darker; crank saturation/lightness
+         down slightly so the rim reads as a line, not a wash. */
+      background-image: radial-gradient(
+        calc(var(--spotlight-size) * var(--glow-rim-size-scale)) calc(var(--spotlight-size) * var(--glow-rim-size-scale)) at
+        calc(var(--x, 0) * 1px)
+        calc(var(--y, 0) * 1px),
+        hsl(var(--hue, 210) 70% 45% / var(--glow-rim-alpha, 1)), transparent 100%
+      );
+      filter: brightness(1.15);
     }
     [data-glow]::after {
       background-image: radial-gradient(
         calc(var(--spotlight-size) * 0.5) calc(var(--spotlight-size) * 0.5) at
         calc(var(--x, 0) * 1px)
         calc(var(--y, 0) * 1px),
-        hsl(0 0% 100% / 0.7), transparent 100%
+        hsl(0 0% 100% / var(--glow-white-alpha, 0.7)), transparent 100%
       );
     }
     [data-glow] [data-glow-inner] {

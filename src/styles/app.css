@@ -431,7 +431,7 @@ body {
   height: var(--bleed-height);
   pointer-events: none;
   z-index: 2;
-  background: linear-gradient(180deg, #070B14 0%, transparent 100%);
+  background: linear-gradient(180deg, var(--bleed-dark) 0%, transparent 100%);
 }
 .bleed-navy-bottom::after,
 .bleed-navy-both::after {
@@ -442,11 +442,32 @@ body {
   height: var(--bleed-height);
   pointer-events: none;
   z-index: 2;
-  background: linear-gradient(0deg, #070B14 0%, transparent 100%);
+  background: linear-gradient(0deg, var(--bleed-dark) 0%, transparent 100%);
 }
 .bleed-navy-top { position: relative; }
 .bleed-navy-bottom { position: relative; }
-.bleed-navy-both { position: relative; }
+
+/* Full-bleed deep-navy band — paints a continuous cinematic navy strip
+   behind its content with soft fade-in + fade-out seams at top/bottom.
+   Theme-safe: --bleed-dark is a fixed navy defined in both light + dark
+   token scopes, so the band looks identical in either theme. */
+.bleed-navy-both {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--bleed-dark);
+  color: var(--text);
+}
+.bleed-navy-both::before,
+.bleed-navy-both::after {
+  z-index: 3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bleed-navy-both::before,
+  .bleed-navy-both::after,
+  .bleed-navy-top::before,
+  .bleed-navy-bottom::after { transition: none; animation: none; }
+}
 
 /* Mobile: shrink bleed so it doesn't eat content on small viewports */
 @media (max-width: 640px) {
@@ -462,6 +483,43 @@ body {
   background: linear-gradient(180deg, transparent 0%, var(--bg) 50%, transparent 100%);
   position: relative;
   z-index: 3;
+}
+
+/* ── Universal seam utilities ─────────────────────────────────
+   Token-driven edge fades that dissolve a section's boundary into the
+   surrounding body bg. Static — no animation needed. Reduced-motion safe
+   by construction. Use on sections where a hard horizontal seam appears. */
+.seam-fade-down {
+  position: relative;
+}
+.seam-fade-down::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 64px;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(180deg, transparent 0%, var(--bg) 100%);
+}
+
+.seam-fade-up {
+  position: relative;
+}
+.seam-fade-up::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 64px;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(0deg, transparent 0%, var(--bg) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seam-fade-down::after,
+  .seam-fade-up::before { transition: none; animation: none; }
 }
 
 /* Grid overlay — 128px, heavily feathered (soft texture, not hard lines) */

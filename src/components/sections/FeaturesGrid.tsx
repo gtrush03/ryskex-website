@@ -26,7 +26,7 @@ export default function FeaturesGrid() {
         <BlurIn className="mb-16 max-w-3xl">
           <div className="eyebrow mb-5">{railsSection.eyebrow}</div>
           <h2 className="display-md text-text">{railsSection.title}</h2>
-          <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-[color:var(--muted)] md:text-[17px]">
+          <p className="shadow-text-soft mt-5 max-w-2xl text-[15px] leading-relaxed text-[color:var(--muted)] md:text-[17px]">
             {railsSection.dek}
           </p>
         </BlurIn>
@@ -90,10 +90,7 @@ export default function FeaturesGrid() {
                       />
                     </div>
 
-                    <p
-                      className="mt-4 text-[14px] leading-relaxed text-white/90"
-                      style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.5)" }}
-                    >
+                    <p className="shadow-text-soft mt-4 text-[14px] leading-relaxed text-text">
                       {r.body}
                     </p>
                     <div className="mt-7 inline-flex items-center gap-1 text-[12.5px] font-medium text-[color:var(--muted)] transition-colors group-hover:text-accent">

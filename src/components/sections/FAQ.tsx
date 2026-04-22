@@ -25,10 +25,7 @@ export default function FAQ() {
           <h2 className="display-md text-text">
             <span className="text-gradient">Six questions</span> cedents ask on the first call.
           </h2>
-          <p
-            className="mt-6 max-w-[36ch] text-[14px] leading-relaxed text-muted"
-            style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}
-          >
+          <p className="shadow-text-soft mt-6 max-w-[36ch] text-[14px] leading-relaxed text-muted">
             Not marketing FAQs. The same six things your captive manager, your
             counsel, and your reinsurance broker will want cleared in the first
             meeting.
@@ -87,7 +84,7 @@ export default function FAQ() {
                         transition={{ duration: 0.3, ease: [0.2, 0.6, 0.2, 1] }}
                         className="overflow-hidden"
                       >
-                        <p className="ml-[42px] mr-10 mt-4 text-[14px] leading-relaxed text-muted">
+                        <p className="shadow-text-soft ml-[42px] mr-10 mt-4 text-[14px] leading-relaxed text-muted">
                           {f.a}
                         </p>
                       </motion.div>

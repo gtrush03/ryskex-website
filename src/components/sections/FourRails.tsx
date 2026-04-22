@@ -23,7 +23,7 @@ export default function FourRails() {
         <BlurIn className="mb-16 max-w-3xl">
           <div className="eyebrow mb-5">{pillarsSection.eyebrow}</div>
           <h2 className="display-md text-text">{pillarsSection.title}</h2>
-          <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-[color:var(--muted)] md:text-[17px]">
+          <p className="shadow-text-soft mt-5 max-w-2xl text-[15px] leading-relaxed text-[color:var(--muted)] md:text-[17px]">
             {pillarsSection.dek}
           </p>
         </BlurIn>
@@ -73,7 +73,7 @@ export default function FourRails() {
                 >
                   {p.title}
                 </h3>
-                <p className="relative mt-5 max-w-[38ch] text-[16px] leading-relaxed text-[color:var(--muted)]">
+                <p className="shadow-text-soft relative mt-5 max-w-[38ch] text-[16px] leading-relaxed text-[color:var(--muted)]">
                   {p.body}
                 </p>
               </motion.div>

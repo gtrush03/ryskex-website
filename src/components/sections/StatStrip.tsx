@@ -21,10 +21,7 @@ export default function StatStrip() {
         <BlurIn className="mb-16 max-w-3xl">
           <div className="eyebrow mb-5">{statSection.eyebrow}</div>
           <h2 className="display-md text-text">{statSection.title}</h2>
-          <p
-            className="mt-5 max-w-2xl text-[15px] leading-relaxed text-muted md:text-[17px]"
-            style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}
-          >
+          <p className="shadow-text-soft mt-5 max-w-2xl text-[15px] leading-relaxed text-muted md:text-[17px]">
             {statSection.sub}
           </p>
         </BlurIn>
@@ -57,7 +54,7 @@ export default function StatStrip() {
                   0{i + 1}
                 </div>
                 <div className="mt-8 stat-numeral text-gradient lit-text">{s.value}</div>
-                <p className="mt-5 max-w-[20ch] text-[14px] leading-snug text-text">
+                <p className="shadow-text-soft mt-5 max-w-[20ch] text-[14px] leading-snug text-text">
                   {s.label}
                 </p>
                 <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-subtle">

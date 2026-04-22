@@ -3,11 +3,26 @@ import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import RotatingText from "@/components/RotatingText";
 import { HomeHero } from "@/components/hero-art";
-import BlurIn from "@/motion/text/BlurIn";
 import TrustStrip from "@/components/hero/TrustStrip";
+import { useReducedMotion } from "@/motion/useReducedMotion";
 import { hero } from "@/lib/data";
 
+const EASE: [number, number, number, number] = [0.2, 0.6, 0.2, 1];
+
+// Headline sizing: tuned so "Truth from the machine." (23 chars) and
+// "Settled in 48 hours." (21 chars) each fit on ONE line at 320, 390, 768,
+// 1024, 1440, 1920 px. Min keeps the 23-char line inside the 256px mobile
+// content band; the 4.4vw scale keeps both lines single-line through the
+// md:grid-cols-[6fr_5fr] hand-off where the left column narrows abruptly.
+const HEADLINE_STYLE = {
+  fontSize: "clamp(24px, 4.4vw, 56px)",
+  lineHeight: 1.05,
+  letterSpacing: "-0.03em",
+  fontWeight: 400,
+} as const;
+
 export default function Hero() {
+  const reduce = useReducedMotion();
   return (
     <section
       className="dark-scope relative overflow-hidden"
@@ -201,9 +216,9 @@ export default function Hero() {
         {/* Left */}
         <div>
           <motion.div
-            initial={{ opacity: 0, y: 8 }}
+            initial={reduce ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1, ease: [0.2, 0.6, 0.2, 1] }}
+            transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
             className="chip mb-10 inline-flex"
             style={{
               background:
@@ -225,46 +240,48 @@ export default function Hero() {
             {hero.eyebrow}
           </motion.div>
 
-          <BlurIn delay={0.2}>
-            <h1
-              className="font-display"
+          <motion.h1
+            initial={reduce ? false : { opacity: 0, y: 12, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
+            className="font-display whitespace-nowrap"
+            style={{
+              ...HEADLINE_STYLE,
+              color: "#F6F7FB",
+              textShadow:
+                "0 0 60px rgba(122,167,246,0.18), 0 2px 40px rgba(3,6,12,0.9), 0 1px 0 rgba(3,6,12,0.5)",
+            }}
+          >
+            {hero.headline}
+          </motion.h1>
+          {/* Wrapper handles the glow filter so framer's blur-in animation on
+              the inner element doesn't fight the drop-shadow. */}
+          <div
+            className="mt-2"
+            style={{ filter: "drop-shadow(0 0 40px rgba(82,136,240,0.28))" }}
+          >
+            <motion.h2
+              initial={reduce ? false : { opacity: 0, y: 12, filter: "blur(10px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.7, delay: 0.35, ease: EASE }}
+              className="font-display whitespace-nowrap"
               style={{
-                color: "#F6F7FB",
-                fontSize: "clamp(38px, 4.6vw, 62px)",
-                lineHeight: 0.98,
-                letterSpacing: "-0.03em",
-                fontWeight: 400,
-                textShadow:
-                  "0 0 60px rgba(122,167,246,0.18), 0 2px 40px rgba(3,6,12,0.9), 0 1px 0 rgba(3,6,12,0.5)",
-              }}
-            >
-              {hero.headline}
-            </h1>
-          </BlurIn>
-          <BlurIn delay={0.35}>
-            <h2
-              className="font-display mt-2"
-              style={{
+                ...HEADLINE_STYLE,
                 backgroundImage:
                   "linear-gradient(96deg, #7AA7F6 0%, #9BC0FB 28%, #5288F0 58%, #3FD582 100%)",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
                 color: "transparent",
-                fontSize: "clamp(38px, 4.6vw, 62px)",
-                lineHeight: 0.98,
-                letterSpacing: "-0.03em",
-                fontWeight: 400,
-                filter: "drop-shadow(0 0 40px rgba(82,136,240,0.28))",
               }}
             >
               {hero.headlineLine2}
-            </h2>
-          </BlurIn>
+            </motion.h2>
+          </div>
 
           <motion.p
-            initial={{ opacity: 0, y: 8 }}
+            initial={reduce ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.55, ease: [0.2, 0.6, 0.2, 1] }}
+            transition={{ duration: 0.5, delay: 0.55, ease: EASE }}
             className="mt-7 max-w-xl text-[15.5px] leading-relaxed md:text-[17px]"
             style={{ color: "rgba(244, 245, 248, 0.80)" }}
           >
@@ -276,9 +293,9 @@ export default function Hero() {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 8 }}
+            initial={reduce ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7, ease: [0.2, 0.6, 0.2, 1] }}
+            transition={{ duration: 0.5, delay: 0.7, ease: EASE }}
             className="mt-8 flex flex-wrap items-center gap-3"
           >
             <Link
@@ -329,7 +346,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.p
-            initial={{ opacity: 0 }}
+            initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.9 }}
             className="mt-10 max-w-lg font-mono text-[11px] uppercase leading-relaxed"
@@ -341,9 +358,9 @@ export default function Hero() {
 
         {/* Right — globe */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.97 }}
+          initial={reduce ? false : { opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.25, ease: [0.2, 0.6, 0.2, 1] }}
+          transition={{ duration: 0.6, delay: 0.25, ease: EASE }}
           className="mx-auto w-full max-w-[560px]"
         >
           <HomeHero />

@@ -7,7 +7,7 @@ import { ChevronDown } from "lucide-react";
 
 export default function Globe() {
   return (
-    <section className="dark-scope relative w-full overflow-hidden pb-16 pt-24 font-light antialiased md:pb-24 md:pt-32">
+    <section className="dark-scope bleed-navy-both relative w-full overflow-hidden pb-16 pt-24 font-light antialiased md:pb-24 md:pt-32">
       {/* Base colour wash — the whole section fades its own edges so no hard
           horizontal seam is ever visible where it meets the neighbours. */}
       <div

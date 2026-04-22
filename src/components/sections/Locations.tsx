@@ -29,7 +29,7 @@ export default function Locations() {
           <h2 className="display-md text-text">
             Two offices. <span className="text-gradient">One exchange.</span>
           </h2>
-          <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/75 md:text-[17px]">
+          <p className="shadow-text-soft mt-5 max-w-2xl text-[15px] leading-relaxed text-muted md:text-[17px]">
             Institutional inquiries route through the office closest to you.
             Replies within two business days from a named operator.
           </p>
@@ -106,17 +106,17 @@ export default function Locations() {
               </div>
 
               <div className="relative mt-10 space-y-4 text-[14px]">
-                <div className="flex items-start gap-3 text-white/70">
+                <div className="flex items-start gap-3 text-muted">
                   <span className="mt-1.5 inline-block h-1 w-1 flex-shrink-0 rounded-full bg-accent" />
                   <span className="text-text">{o.address}</span>
                 </div>
-                <div className="pl-4 text-[13px] italic leading-relaxed text-white/70">
+                <div className="pl-4 text-[13px] italic leading-relaxed text-muted">
                   {o.role}
                 </div>
               </div>
 
               <div
-                className="relative mt-8 flex items-center justify-between pt-5 font-mono text-[11px] text-white/70"
+                className="relative mt-8 flex items-center justify-between pt-5 font-mono text-[11px] text-muted"
                 style={{
                   borderTop: "1px solid transparent",
                   borderImage:

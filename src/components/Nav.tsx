@@ -58,12 +58,16 @@ export default function Nav() {
           "glass relative flex h-14 w-full max-w-[1080px] items-center justify-between rounded-full px-3 pr-2 transition-all duration-300 motion-reduce:transition-none md:h-[60px] md:px-6 md:pr-3",
           scrolled &&
             "md:shadow-[0_24px_60px_-28px_rgba(0,0,0,0.65),0_0_0_1px_rgba(82,136,240,0.18)]",
+          // Mobile pill shadow: drop + cobalt rim (both themes). White underglow
+          // only reads on dark — gated via the light: variant below.
           scrolled &&
-            "shadow-[0_8px_32px_-12px_rgba(0,0,0,0.55),0_0_0_1px_rgba(82,136,240,0.22),0_0_24px_-6px_rgba(255,255,255,0.18)]"
+            "shadow-[0_8px_32px_-12px_rgba(0,0,0,0.55),0_0_0_1px_rgba(82,136,240,0.22),0_0_24px_-6px_rgba(255,255,255,0.18)]",
+          scrolled &&
+            "light:shadow-[0_8px_32px_-12px_rgba(0,0,0,0.18),0_0_0_1px_rgba(29,74,154,0.24)]"
         )}
         style={{
           background: scrolled
-            ? "linear-gradient(180deg, rgba(244,245,248,0.12) 0%, rgba(59,114,222,0.05) 100%), rgba(11,16,28,0.82)"
+            ? "linear-gradient(180deg, var(--glass-top-highlight) 0%, var(--accent-soft) 100%), var(--glass-deep)"
             : undefined,
           backdropFilter: scrolled ? "blur(42px) saturate(1.5)" : undefined,
           WebkitBackdropFilter: scrolled ? "blur(42px) saturate(1.5)" : undefined,
@@ -121,10 +125,10 @@ export default function Nav() {
 
       {open && (
         <div
-          className="glass absolute left-3 right-3 top-[calc(100%+12px)] rounded-2xl p-4 shadow-[0_16px_48px_-16px_rgba(0,0,0,0.6),0_0_0_1px_rgba(82,136,240,0.20)] md:hidden"
+          className="glass absolute left-3 right-3 top-[calc(100%+12px)] rounded-2xl p-4 shadow-[0_16px_48px_-16px_rgba(0,0,0,0.6),0_0_0_1px_var(--accent-ring)] md:hidden"
           style={{
             background:
-              "linear-gradient(180deg, rgba(244,245,248,0.12) 0%, rgba(59,114,222,0.05) 100%), rgba(11,16,28,0.86)",
+              "linear-gradient(180deg, var(--glass-top-highlight) 0%, var(--accent-soft) 100%), var(--glass-deep)",
             backdropFilter: "blur(42px) saturate(1.5)",
             WebkitBackdropFilter: "blur(42px) saturate(1.5)",
           }}
@@ -135,7 +139,7 @@ export default function Nav() {
                 key={item.to}
                 to={item.to}
                 onClick={() => setOpen(false)}
-                className="py-2.5 text-[15px] font-medium text-text"
+                className="flex min-h-11 items-center text-[15px] font-medium text-text"
               >
                 {item.label}
               </NavLink>

@@ -75,7 +75,7 @@ export default function ValuesGrid() {
                 >
                   {v.title}
                 </h3>
-                <p className="relative mt-4 max-w-[38ch] text-[15px] leading-relaxed text-[color:var(--muted)]">
+                <p className="shadow-text-soft relative mt-4 max-w-[38ch] text-[15px] leading-relaxed text-[color:var(--muted)]">
                   {v.body}
                 </p>
               </motion.div>

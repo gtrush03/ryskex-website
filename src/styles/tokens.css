@@ -66,6 +66,8 @@
 
   /* Luminous text shadow — lit-from-within display type */
   --text-shadow-lit: 0 4px 40px rgba(3, 6, 12, 0.6);
+  /* Soft legibility shadow for body copy over ambient glow backgrounds (dark). */
+  --text-shadow-soft: 0 1px 12px rgb(0 0 0 / 0.35);
 
   /* Feedback */
   --ok: #2EC46E;
@@ -176,6 +178,8 @@ html.light {
   --mesh-5: rgba(32, 160, 56, 0.08);
 
   --text-shadow-lit: none;
+  /* In light mode the soft shadow would muddy the type — disable it. */
+  --text-shadow-soft: none;
 
   --glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -1px 0 rgba(0, 0, 0, 0.04), 0 24px 60px -28px rgba(30, 30, 30, 0.16), 0 2px 8px -3px rgba(0, 0, 0, 0.06);
   --glass-deep: rgba(255, 255, 255, 0.78);
@@ -195,4 +199,12 @@ html.light { color-scheme: light; }
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+/* ── Legibility helper ───────────────────────────────────────
+   Soft drop-shadow for body paragraphs that sit over ambient
+   glow backgrounds. Theme-aware via --text-shadow-soft: active
+   on dark (subtle lift), disabled on light (no muddying). */
+.shadow-text-soft {
+  text-shadow: var(--text-shadow-soft);
 }

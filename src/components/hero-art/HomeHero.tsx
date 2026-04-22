@@ -108,6 +108,8 @@ export default function HomeHero({ className }: Props) {
       className={className}
       role="img"
       aria-label="RYSKEX global exchange — financial hubs connected across a tilted wireframe globe"
+      shapeRendering="geometricPrecision"
+      textRendering="geometricPrecision"
     >
       <defs>
         <radialGradient id="home-hero-space" cx="50%" cy="50%" r="65%">
@@ -198,10 +200,30 @@ export default function HomeHero({ className }: Props) {
               })}
               {ring.labels.map((lbl, li) => {
                 const ang = (li / ring.labels.length) * Math.PI * 2;
-                const labelOffset = ring.r * 0.03 + 12;
+                const labelOffset = ring.r * 0.03 + 14;
                 const lx = CX + Math.cos(ang) * (ring.r + labelOffset);
                 const ly = CY + Math.sin(ang) * (ring.r + labelOffset);
-                return <text key={`l${ri}${li}`} x={lx} y={ly} textAnchor="middle" dominantBaseline="middle" fontSize="6" fontFamily="var(--font-mono)" fill="#7AA7F6" opacity="0.55" letterSpacing="0.5">{lbl}</text>;
+                return (
+                  <text
+                    key={`l${ri}${li}`}
+                    x={lx}
+                    y={ly}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fontSize="7.5"
+                    fontFamily="var(--font-mono)"
+                    fill="#9BC0FB"
+                    opacity="0.7"
+                    letterSpacing="0.6"
+                    fontWeight="500"
+                    paintOrder="stroke"
+                    stroke="#03060C"
+                    strokeWidth="0.9"
+                    strokeLinejoin="round"
+                  >
+                    {lbl}
+                  </text>
+                );
               })}
             </motion.g>
           </g>
@@ -309,7 +331,22 @@ export default function HomeHero({ className }: Props) {
                 )}
               </g>
               {showLabel && (
-                <text x={o.x + 6} y={o.y - 5} fontSize="8" fontFamily="var(--font-mono)" fill="#F4F5F8" letterSpacing="0.8" opacity="0.82">{o.code}</text>
+                <text
+                  x={o.x + 7}
+                  y={o.y - 5}
+                  fontSize="9"
+                  fontFamily="var(--font-mono)"
+                  fill="#F4F5F8"
+                  letterSpacing="0.8"
+                  opacity="0.9"
+                  fontWeight="500"
+                  paintOrder="stroke"
+                  stroke="#03060C"
+                  strokeWidth="1.1"
+                  strokeLinejoin="round"
+                >
+                  {o.code}
+                </text>
               )}
             </g>
           );
