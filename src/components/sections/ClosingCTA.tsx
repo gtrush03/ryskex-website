@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@/components/icons/brand";
 import { closingCta } from "@/lib/data";
+import { DURATION_SLOW, EASE_OUT_SOFT } from "@/motion/constants";
 
 export default function ClosingCTA() {
   return (
@@ -23,7 +24,7 @@ export default function ClosingCTA() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: DURATION_SLOW, ease: EASE_OUT_SOFT }}
           className="glass-deep relative mx-auto max-w-5xl overflow-hidden rounded-[32px] p-12 text-center md:p-24"
         >
           <div

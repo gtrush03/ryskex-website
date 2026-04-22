@@ -2,6 +2,7 @@
 // Pure CSS surfaces driven by Framer Motion, with a noise overlay for texture.
 
 import { motion } from "framer-motion";
+import { EASE_IN_OUT } from "@/motion/constants";
 
 type Props = {
   intensity?: number;
@@ -73,7 +74,7 @@ export default function FlowMesh({ intensity = 0.7, className = "" }: Props) {
             animate={b.animate}
             transition={{
               duration: b.duration,
-              ease: [0.45, 0, 0.55, 1],
+              ease: EASE_IN_OUT,
               repeat: Infinity,
               repeatType: "loop",
             }}

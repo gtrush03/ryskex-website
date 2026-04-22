@@ -1,5 +1,5 @@
 import { useTheme } from "@/lib/theme";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon } from "@/components/icons/brand";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 export default function ThemeToggle() {

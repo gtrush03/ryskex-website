@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@/components/icons/brand";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import { steps } from "@/lib/data";
 import { HowItWorksHero } from "@/components/hero-art";
 import BlurIn from "@/motion/text/BlurIn";
+import { EASE_OUT_SOFT } from "@/motion/constants";
 
 const TERMS = [
   ["Cedent", "Party transferring risk. Usually a captive or corporate risk treasury."],
@@ -92,7 +93,7 @@ export default function HowItWorks() {
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6 }}
+                  transition={{ duration: 0.6, ease: EASE_OUT_SOFT }}
                   className="relative md:pl-24"
                 >
                   <div

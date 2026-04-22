@@ -4,6 +4,7 @@
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { useReducedMotion } from '../useReducedMotion';
+import { EASE_OUT_SOFT } from '../constants';
 
 export interface BlurInProps {
   children: ReactNode;
@@ -11,8 +12,6 @@ export interface BlurInProps {
   duration?: number;
   className?: string;
 }
-
-const EASE: [number, number, number, number] = [0.2, 0.6, 0.2, 1];
 
 export default function BlurIn({
   children,
@@ -30,7 +29,7 @@ export default function BlurIn({
       initial={{ opacity: 0, y: 16, filter: 'blur(12px)' }}
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: duration / 1000, ease: EASE, delay }}
+      transition={{ duration: duration / 1000, ease: EASE_OUT_SOFT, delay }}
     >
       {children}
     </motion.div>

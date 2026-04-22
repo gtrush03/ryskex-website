@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "@/components/icons/brand";
 import StatStrip from "@/components/sections/StatStrip";
 import ValuesGrid from "@/components/sections/ValuesGrid";
 import FounderQuote from "@/components/sections/FounderQuote";
@@ -8,6 +8,7 @@ import ClosingCTA from "@/components/sections/ClosingCTA";
 import { missionContent } from "@/lib/data";
 import { AboutHero } from "@/components/hero-art";
 import BlurIn from "@/motion/text/BlurIn";
+import { DURATION_NORMAL, EASE_OUT_SOFT } from "@/motion/constants";
 
 export default function About() {
   const [i, setI] = useState(0);
@@ -72,7 +73,7 @@ export default function About() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.5, ease: [0.2, 0.6, 0.2, 1] }}
+                transition={{ duration: DURATION_NORMAL, ease: EASE_OUT_SOFT }}
                 className="grid items-center gap-12 md:grid-cols-2 md:gap-16"
               >
                 <div>

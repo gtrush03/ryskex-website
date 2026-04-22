@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "@/components/icons/brand";
 import RotatingText from "@/components/RotatingText";
 import { HomeHero } from "@/components/hero-art";
 import TrustStrip from "@/components/hero/TrustStrip";
 import { useReducedMotion } from "@/motion/useReducedMotion";
+import {
+  DURATION_NORMAL,
+  DURATION_SLOW,
+  EASE_OUT_SOFT,
+} from "@/motion/constants";
 import { hero } from "@/lib/data";
-
-const EASE: [number, number, number, number] = [0.2, 0.6, 0.2, 1];
 
 // Headline sizing: tuned so "Truth from the machine." (23 chars) and
 // "Settled in 48 hours." (21 chars) each fit on ONE line at 320, 390, 768,
@@ -218,7 +221,7 @@ export default function Hero() {
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+            transition={{ duration: DURATION_NORMAL, delay: 0.1, ease: EASE_OUT_SOFT }}
             className="chip mb-10 inline-flex"
             style={{
               background:
@@ -243,7 +246,7 @@ export default function Hero() {
           <motion.h1
             initial={reduce ? false : { opacity: 0, y: 12, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
+            transition={{ duration: DURATION_SLOW, delay: 0.2, ease: EASE_OUT_SOFT }}
             className="font-display whitespace-nowrap"
             style={{
               ...HEADLINE_STYLE,
@@ -263,7 +266,7 @@ export default function Hero() {
             <motion.h2
               initial={reduce ? false : { opacity: 0, y: 12, filter: "blur(10px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.7, delay: 0.35, ease: EASE }}
+              transition={{ duration: DURATION_SLOW, delay: 0.35, ease: EASE_OUT_SOFT }}
               className="font-display whitespace-nowrap"
               style={{
                 ...HEADLINE_STYLE,
@@ -281,7 +284,7 @@ export default function Hero() {
           <motion.p
             initial={reduce ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.55, ease: EASE }}
+            transition={{ duration: DURATION_NORMAL, delay: 0.55, ease: EASE_OUT_SOFT }}
             className="mt-7 max-w-xl text-[15.5px] leading-relaxed md:text-[17px]"
             style={{ color: "rgba(244, 245, 248, 0.80)" }}
           >
@@ -295,7 +298,7 @@ export default function Hero() {
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7, ease: EASE }}
+            transition={{ duration: DURATION_NORMAL, delay: 0.7, ease: EASE_OUT_SOFT }}
             className="mt-8 flex flex-wrap items-center gap-3"
           >
             <Link
@@ -348,7 +351,7 @@ export default function Hero() {
           <motion.p
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.9 }}
+            transition={{ duration: DURATION_NORMAL, delay: 0.9 }}
             className="mt-10 max-w-lg font-mono text-[11px] uppercase leading-relaxed"
             style={{ color: "rgba(244, 245, 248, 0.52)", letterSpacing: "0.15em" }}
           >
@@ -360,7 +363,7 @@ export default function Hero() {
         <motion.div
           initial={reduce ? false : { opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.25, ease: EASE }}
+          transition={{ duration: 0.6, delay: 0.25, ease: EASE_OUT_SOFT }}
           className="mx-auto w-full max-w-[560px]"
         >
           <HomeHero />

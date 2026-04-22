@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { founderPullQuote, team } from "@/lib/data";
+import { DURATION_SLOW, EASE_OUT_SOFT } from "@/motion/constants";
 
 // Minimal, flush-aligned founder card. Rectangular portrait (not a circle),
 // editorial type, thin rail accents. In dark mode — smoked glass with cobalt+green
@@ -26,7 +27,7 @@ export default function FounderQuote() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7, ease: [0.2, 0.6, 0.2, 1] }}
+          transition={{ duration: DURATION_SLOW, ease: EASE_OUT_SOFT }}
           className="founder-card relative mx-auto max-w-5xl overflow-hidden rounded-[20px]"
         >
           {/* Left gradient rail — present in both modes, different hue per theme */}

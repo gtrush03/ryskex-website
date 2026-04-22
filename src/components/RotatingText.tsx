@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "@/motion/useReducedMotion";
+import { DURATION_FAST, EASE_OUT_SOFT } from "@/motion/constants";
 
 // Rotates through counterparty names for the hero sub-headline.
 // Ember-gradient clip on the active word. Respects prefers-reduced-motion:
@@ -36,7 +37,7 @@ export default function RotatingText({
           initial={reduce ? false : { opacity: 0, y: "70%", filter: "blur(6px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           exit={reduce ? { opacity: 0 } : { opacity: 0, y: "-70%", filter: "blur(6px)" }}
-          transition={{ duration: reduce ? 0.2 : 0.45, ease: [0.2, 0.6, 0.2, 1] }}
+          transition={{ duration: reduce ? DURATION_FAST : 0.45, ease: EASE_OUT_SOFT }}
           className="inline-block text-gradient italic"
           style={{ fontFamily: "var(--font-display)" }}
         >

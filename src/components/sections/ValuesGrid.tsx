@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { values } from "@/lib/data";
 import BlurIn from "@/motion/text/BlurIn";
+import { DURATION_NORMAL, EASE_OUT_SOFT } from "@/motion/constants";
 
 export default function ValuesGrid() {
   return (
@@ -33,7 +34,7 @@ export default function ValuesGrid() {
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
+                transition={{ duration: DURATION_NORMAL, delay: i * 0.05, ease: EASE_OUT_SOFT }}
                 className="glass-deep relative overflow-hidden rounded-[22px] p-10 md:p-12"
               >
                 <div

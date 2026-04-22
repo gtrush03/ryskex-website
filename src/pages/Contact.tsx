@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Send } from "lucide-react";
+import { ArrowRight, Send } from "@/components/icons/brand";
 import { offices } from "@/lib/data";
 import { ContactHero } from "@/components/hero-art";
 import BlurIn from "@/motion/text/BlurIn";
+import { EASE_OUT_SOFT } from "@/motion/constants";
 
 type Status = "idle" | "sending" | "sent";
 
@@ -78,7 +79,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
+            transition={{ duration: 0.55, ease: EASE_OUT_SOFT }}
           >
             <div className="glass-deep relative overflow-hidden rounded-[24px] p-6 md:p-12">
               <div
@@ -179,7 +180,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.1 }}
+            transition={{ duration: 0.55, delay: 0.1, ease: EASE_OUT_SOFT }}
             className="space-y-6"
           >
             {offices.map((o) => (

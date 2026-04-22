@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { animate, useInView, useMotionValue, useTransform } from 'framer-motion';
 import { useReducedMotion } from './useReducedMotion';
+import { EASE_OUT_SOFT } from './constants';
 
 export interface CountUpProps {
   value: number;
@@ -44,7 +45,7 @@ export default function CountUp({
 
     const controls = animate(mv, value, {
       duration: duration / 1000,
-      ease: [0.2, 0.6, 0.2, 1],
+      ease: EASE_OUT_SOFT,
     });
     return () => controls.stop();
   }, [inView, reduced, value, duration, decimals, mv]);

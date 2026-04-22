@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { MapPin } from "lucide-react";
+import { MapPin } from "@/components/icons/brand";
 import { offices } from "@/lib/data";
 import BlurIn from "@/motion/text/BlurIn";
 import { HartfordLandmark, LondonLandmark } from "@/components/city-art";
+import { EASE_OUT_SOFT } from "@/motion/constants";
 
 const LANDMARKS: Record<string, React.ComponentType<{ className?: string }>> = {
   London: LondonLandmark,
@@ -44,7 +45,7 @@ export default function Locations() {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
+              transition={{ duration: 0.6, delay: i * 0.08, ease: EASE_OUT_SOFT }}
               className="glass-deep relative overflow-hidden rounded-[22px] p-8 md:p-12"
             >
               {/* City landmark — premium custom SVG */}

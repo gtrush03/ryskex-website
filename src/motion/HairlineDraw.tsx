@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useReducedMotion } from './useReducedMotion';
+import { EASE_OUT_SOFT } from './constants';
 
 export interface HairlineDrawProps {
   d: string;
@@ -58,7 +59,7 @@ export default function HairlineDraw({
         d={d}
         initial={reduced ? { strokeDashoffset: 0 } : { strokeDashoffset: length }}
         animate={{ strokeDashoffset: shouldAnimate ? 0 : reduced ? 0 : length }}
-        transition={{ duration: duration / 1000, ease: [0.2, 0.6, 0.2, 1] }}
+        transition={{ duration: duration / 1000, ease: EASE_OUT_SOFT }}
         style={{ strokeDasharray: length }}
       />
     </svg>

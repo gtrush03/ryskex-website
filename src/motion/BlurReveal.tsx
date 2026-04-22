@@ -4,6 +4,7 @@
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { useReducedMotion } from './useReducedMotion';
+import { DURATION_SLOW, EASE_OUT_SOFT } from './constants';
 
 export interface BlurRevealProps {
   children: ReactNode;
@@ -11,8 +12,6 @@ export interface BlurRevealProps {
   amount?: 'some' | 'all';
   className?: string;
 }
-
-const EASE: [number, number, number, number] = [0.2, 0.6, 0.2, 1];
 
 export default function BlurReveal({
   children,
@@ -32,7 +31,7 @@ export default function BlurReveal({
       initial={{ opacity: 0, y: 16, filter: 'blur(10px)' }}
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       viewport={{ once: true, margin: '-80px', amount }}
-      transition={{ duration: 0.7, ease: EASE, delay }}
+      transition={{ duration: DURATION_SLOW, ease: EASE_OUT_SOFT, delay }}
     >
       {children}
     </motion.div>

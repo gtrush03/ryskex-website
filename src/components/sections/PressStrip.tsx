@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { pressQuotes } from "@/lib/data";
 import BlurIn from "@/motion/text/BlurIn";
+import { EASE_OUT_SOFT, STAGGER_CHILD } from "@/motion/constants";
 
 export default function PressStrip() {
   return (
@@ -31,7 +32,7 @@ export default function PressStrip() {
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.55, delay: i * 0.06 }}
+              transition={{ duration: 0.55, delay: i * STAGGER_CHILD, ease: EASE_OUT_SOFT }}
               className="glass-deep relative overflow-hidden rounded-[22px] p-10"
             >
               {/* drop-cap glow behind the opening quote */}

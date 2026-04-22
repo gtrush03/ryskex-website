@@ -3,6 +3,7 @@
 // (London · Hartford · New York · Berlin). Rotates smoothly, accessible.
 
 import { motion } from "framer-motion";
+import { DURATION_EPIC, EASE_OUT_SOFT } from "@/motion/constants";
 
 const OFFICES = [
   { city: "LONDON", lat: 51.5, lon: -0.1 },
@@ -29,7 +30,7 @@ export default function BrandGlobe() {
     <motion.figure
       initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1.2, ease: [0.2, 0.6, 0.2, 1] }}
+      transition={{ duration: DURATION_EPIC, ease: EASE_OUT_SOFT }}
       className="relative mx-auto w-full max-w-[520px]"
     >
       {/* Outer ambient halo */}

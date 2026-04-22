@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus } from "@/components/icons/brand";
 import { faqs } from "@/lib/data";
 import BlurIn from "@/motion/text/BlurIn";
+import { EASE_OUT_SOFT } from "@/motion/constants";
 
 export default function FAQ() {
   const [openIdx, setOpen] = useState<number | null>(0);
@@ -81,7 +82,7 @@ export default function FAQ() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.2, 0.6, 0.2, 1] }}
+                        transition={{ duration: 0.3, ease: EASE_OUT_SOFT }}
                         className="overflow-hidden"
                       >
                         <p className="shadow-text-soft ml-[42px] mr-10 mt-4 text-[14px] leading-relaxed text-muted">

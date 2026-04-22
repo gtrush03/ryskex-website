@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown } from "@/components/icons/brand";
 
 // Globe section at the bottom of the home page — melts into both neighbours.
 // Earth image is rendered normally (no mix-blend-mode) so it stays visible.

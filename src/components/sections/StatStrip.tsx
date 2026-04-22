@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { stats, statSection } from "@/lib/data";
 import BlurIn from "@/motion/text/BlurIn";
+import { DURATION_NORMAL, EASE_OUT_SOFT, STAGGER_CHILD } from "@/motion/constants";
 
 export default function StatStrip() {
   return (
@@ -33,7 +34,7 @@ export default function StatStrip() {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.06, ease: [0.2, 0.6, 0.2, 1] }}
+              transition={{ duration: DURATION_NORMAL, delay: i * STAGGER_CHILD, ease: EASE_OUT_SOFT }}
               className="glass-deep relative rounded-2xl p-8 md:p-10"
             >
               {/* ambient cobalt glow behind numeral */}

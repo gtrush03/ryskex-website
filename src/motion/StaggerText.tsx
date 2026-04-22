@@ -4,6 +4,7 @@
 import type { ElementType } from 'react';
 import { motion } from 'framer-motion';
 import { useReducedMotion } from './useReducedMotion';
+import { EASE_OUT_SOFT, STAGGER_CHILD } from './constants';
 
 export interface StaggerTextProps {
   text: string;
@@ -12,8 +13,6 @@ export interface StaggerTextProps {
   delay?: number;
   className?: string;
 }
-
-const EASE: [number, number, number, number] = [0.2, 0.6, 0.2, 1];
 
 export default function StaggerText({
   text,
@@ -30,7 +29,7 @@ export default function StaggerText({
   }
 
   const pieces = by === 'word' ? text.split(/(\s+)/) : Array.from(text);
-  const perStep = by === 'word' ? 0.06 : 0.018;
+  const perStep = by === 'word' ? STAGGER_CHILD : 0.018;
 
   return (
     <Tag className={className} aria-label={text}>
@@ -67,7 +66,7 @@ export default function StaggerText({
                 shown: {
                   opacity: 1,
                   y: 0,
-                  transition: { duration: 0.48, ease: EASE },
+                  transition: { duration: 0.48, ease: EASE_OUT_SOFT },
                 },
               }}
             >

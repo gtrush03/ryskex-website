@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { team } from "@/lib/data";
 import { TeamHero } from "@/components/hero-art";
 import BlurIn from "@/motion/text/BlurIn";
+import { DURATION_NORMAL, EASE_OUT_SOFT } from "@/motion/constants";
 
 export default function Team() {
   return (
@@ -61,7 +62,7 @@ export default function Team() {
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: i * 0.04 }}
+                transition={{ duration: DURATION_NORMAL, delay: i * 0.04, ease: EASE_OUT_SOFT }}
                 className="group relative"
               >
                 <div className="glass relative aspect-[4/5] overflow-hidden rounded-[20px]">

@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "@/components/icons/brand";
 import { rails, railsSection } from "@/lib/data";
 import { RAIL_ICONS } from "@/components/RailIcons";
 import GlowCard from "@/components/ui/spotlight-card";
 import BlurIn from "@/motion/text/BlurIn";
 import { useReducedMotion } from "@/motion/useReducedMotion";
+import { DURATION_NORMAL, EASE_OUT_SOFT } from "@/motion/constants";
 
 export default function FeaturesGrid() {
   const reduced = useReducedMotion();
@@ -45,7 +46,7 @@ export default function FeaturesGrid() {
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: i * 0.05, ease: [0.2, 0.6, 0.2, 1] }}
+                transition={{ duration: DURATION_NORMAL, delay: i * 0.05, ease: EASE_OUT_SOFT }}
                 whileHover={reduced ? undefined : { scale: 1.02 }}
               >
                 <GlowCard

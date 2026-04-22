@@ -4,6 +4,7 @@
 import type { ElementType } from 'react';
 import { motion } from 'framer-motion';
 import { useReducedMotion } from '../useReducedMotion';
+import { EASE_OUT_SOFT } from '../constants';
 
 export interface WordStaggerProps {
   text: string;
@@ -11,8 +12,6 @@ export interface WordStaggerProps {
   as?: 'h1' | 'h2' | 'p' | 'span';
   className?: string;
 }
-
-const EASE: [number, number, number, number] = [0.2, 0.6, 0.2, 1];
 
 export default function WordStagger({
   text,
@@ -44,7 +43,7 @@ export default function WordStagger({
               style={{ display: 'inline-block', willChange: 'transform, opacity' }}
               variants={{
                 hidden: { opacity: 0, y: 14 },
-                shown: { opacity: 1, y: 0, transition: { duration: 0.48, ease: EASE } },
+                shown: { opacity: 1, y: 0, transition: { duration: 0.48, ease: EASE_OUT_SOFT } },
               }}
             >
               {w}

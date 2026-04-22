@@ -4,6 +4,7 @@
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { useReducedMotion } from './useReducedMotion';
+import { EASE_OUT_SOFT } from './constants';
 
 export interface RevealProps {
   children: ReactNode;
@@ -12,8 +13,6 @@ export interface RevealProps {
   y?: number;
   className?: string;
 }
-
-const EASE: [number, number, number, number] = [0.2, 0.6, 0.2, 1];
 
 export default function Reveal({
   children,
@@ -34,7 +33,7 @@ export default function Reveal({
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px', amount }}
-      transition={{ duration: 0.24, ease: EASE, delay }}
+      transition={{ duration: 0.24, ease: EASE_OUT_SOFT, delay }}
     >
       {children}
     </motion.div>

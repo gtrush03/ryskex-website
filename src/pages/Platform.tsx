@@ -4,6 +4,7 @@ import FourRails from "@/components/sections/FourRails";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import { PlatformHero } from "@/components/hero-art";
 import BlurIn from "@/motion/text/BlurIn";
+import { EASE_OUT_SOFT } from "@/motion/constants";
 
 const subSections = [
   {
@@ -113,7 +114,7 @@ export default function Platform() {
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6 }}
+                  transition={{ duration: 0.6, ease: EASE_OUT_SOFT }}
                 >
                   <div className="eyebrow mb-5">
                     <span className="text-subtle">0{i + 1}</span>

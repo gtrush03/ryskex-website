@@ -4,6 +4,7 @@
 import type { ElementType } from 'react';
 import { motion } from 'framer-motion';
 import { useReducedMotion } from '../useReducedMotion';
+import { EASE_OUT_SOFT } from '../constants';
 
 export interface CharStaggerProps {
   text: string;
@@ -12,8 +13,6 @@ export interface CharStaggerProps {
   as?: 'h1' | 'h2' | 'p' | 'span';
   className?: string;
 }
-
-const EASE: [number, number, number, number] = [0.2, 0.6, 0.2, 1];
 const OFFSETS = {
   top: { x: 0, y: -12 },
   bottom: { x: 0, y: 12 },
@@ -51,7 +50,7 @@ export default function CharStagger({
             style={{ display: 'inline-block', whiteSpace: 'pre', willChange: 'transform, opacity' }}
             variants={{
               hidden: { opacity: 0, x: offset.x, y: offset.y },
-              shown: { opacity: 1, x: 0, y: 0, transition: { duration: 0.48, ease: EASE } },
+              shown: { opacity: 1, x: 0, y: 0, transition: { duration: 0.48, ease: EASE_OUT_SOFT } },
             }}
           >
             {c === ' ' ? ' ' : c}

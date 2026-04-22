@@ -7,6 +7,7 @@ import {
   useReducedMotion,
   useTransform,
 } from "framer-motion";
+import { DURATION_NORMAL, EASE_OUT_SOFT, STAGGER_CHILD } from "@/motion/constants";
 
 export interface TrustStripProps {
   className?: string;
@@ -50,7 +51,7 @@ function CountUp({ target, reduceMotion }: { target: number; reduceMotion: boole
 
   useEffect(() => {
     if (reduceMotion || !inView) return;
-    const controls = animate(mv, target, { duration: 1.4, ease: [0.2, 0.6, 0.2, 1] });
+    const controls = animate(mv, target, { duration: 1.4, ease: EASE_OUT_SOFT });
     return () => controls.stop();
   }, [inView, mv, reduceMotion, target]);
 
@@ -102,7 +103,7 @@ export default function TrustStrip({ className, compact = false }: TrustStripPro
         initial={reduceMotion ? false : { opacity: 0, y: 8, filter: "blur(8px)" }}
         whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         viewport={{ once: true, margin: "-10% 0px" }}
-        transition={{ duration: 0.5, ease: [0.2, 0.6, 0.2, 1] }}
+        transition={{ duration: DURATION_NORMAL, ease: EASE_OUT_SOFT }}
         className={className}
       >
         <Marquee reduceMotion={reduceMotion} />
@@ -116,7 +117,7 @@ export default function TrustStrip({ className, compact = false }: TrustStripPro
       initial={reduceMotion ? false : { opacity: 0, y: 8, filter: "blur(8px)" }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-10% 0px" }}
-      transition={{ duration: 0.5, ease: [0.2, 0.6, 0.2, 1] }}
+      transition={{ duration: DURATION_NORMAL, ease: EASE_OUT_SOFT }}
       className={
         "relative " +
         "bg-[linear-gradient(180deg,rgba(13,18,32,0.4)_0%,rgba(13,18,32,0.18)_100%)] " +
@@ -143,7 +144,7 @@ export default function TrustStrip({ className, compact = false }: TrustStripPro
               initial={reduceMotion ? false : { opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10% 0px" }}
-              transition={{ duration: 0.5, delay: 0.05 + i * 0.08, ease: [0.2, 0.6, 0.2, 1] }}
+              transition={{ duration: DURATION_NORMAL, delay: 0.05 + i * 0.08, ease: EASE_OUT_SOFT }}
               className="relative flex items-center justify-between gap-4 overflow-hidden rounded-full px-5 py-3 md:px-6 md:py-3.5"
               style={{
                 background:
@@ -188,7 +189,7 @@ export default function TrustStrip({ className, compact = false }: TrustStripPro
               initial={reduceMotion ? false : { opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10% 0px" }}
-              transition={{ duration: 0.5, delay: 0.05 + i * 0.06, ease: [0.2, 0.6, 0.2, 1] }}
+              transition={{ duration: DURATION_NORMAL, delay: 0.05 + i * STAGGER_CHILD, ease: EASE_OUT_SOFT }}
               className="flex flex-col gap-2"
             >
               <div

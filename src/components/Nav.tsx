@@ -1,6 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight } from "@/components/icons/brand";
 import Wordmark from "./Wordmark";
 import ThemeToggle from "./ThemeToggle";
 import { nav } from "@/lib/data";

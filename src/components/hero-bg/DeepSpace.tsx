@@ -3,6 +3,7 @@
 
 import { useMemo } from "react";
 import { motion } from "framer-motion";
+import { EASE_IN_OUT } from "@/motion/constants";
 
 type Props = { className?: string };
 
@@ -106,7 +107,7 @@ export default function DeepSpace({ className = "" }: Props) {
             animate={{ x: [0, o.dx, 0], y: [0, o.dy, 0] }}
             transition={{
               duration: o.dur,
-              ease: [0.45, 0, 0.55, 1],
+              ease: EASE_IN_OUT,
               repeat: Infinity,
               repeatType: "mirror",
             }}
