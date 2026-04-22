@@ -6,6 +6,7 @@ import { steps } from "@/lib/data";
 import { HowItWorksHero } from "@/components/hero-art";
 import BlurIn from "@/motion/text/BlurIn";
 import { EASE_OUT_SOFT } from "@/motion/constants";
+import Meta from "@/components/Meta";
 
 const TERMS = [
   ["Cedent", "Party transferring risk. Usually a captive or corporate risk treasury."],
@@ -27,6 +28,7 @@ const NOT = [
 export default function HowItWorks() {
   return (
     <>
+      <Meta routeKey="/how-it-works" />
       <section className="mesh-hero dark-scope relative overflow-hidden pt-24 pb-16 md:pt-44 md:pb-24">
         <div className="aurora" aria-hidden />
         <div className="noise" aria-hidden />

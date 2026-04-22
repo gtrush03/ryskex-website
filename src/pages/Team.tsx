@@ -3,10 +3,12 @@ import { team } from "@/lib/data";
 import { TeamHero } from "@/components/hero-art";
 import BlurIn from "@/motion/text/BlurIn";
 import { DURATION_NORMAL, EASE_OUT_SOFT } from "@/motion/constants";
+import Meta from "@/components/Meta";
 
 export default function Team() {
   return (
     <>
+      <Meta routeKey="/team" />
       <section className="mesh-hero dark-scope relative overflow-hidden pt-24 pb-16 md:pt-44 md:pb-24">
         <div className="aurora" aria-hidden />
         <div className="noise" aria-hidden />

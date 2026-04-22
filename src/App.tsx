@@ -4,6 +4,8 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import ScrollProgress from "./motion/ScrollProgress";
 import RouteSuspense from "./components/RouteSuspense";
+// Eager import — the fallback must be available even if a route chunk fails.
+import ErrorBoundary from "./components/ErrorBoundary";
 
 // Code-split every route. Each page ships its own chunk, loaded on navigation.
 const Home = lazy(() => import("./pages/Home"));
@@ -21,17 +23,19 @@ export default function App() {
       <ScrollProgress />
       <Nav />
       <main id="main">
-        <Suspense fallback={<RouteSuspense />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/platform" element={<Platform />} />
-            <Route path="/how-it-works" element={<HowItWorks />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<RouteSuspense />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/platform" element={<Platform />} />
+              <Route path="/how-it-works" element={<HowItWorks />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer />
     </div>

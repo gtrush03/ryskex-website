@@ -50,6 +50,7 @@ function StationIcon({ id, cx, cy, reduce }: { id: string; cx: number; cy: numbe
           fill="none"
           stroke="#2EC46E"
           strokeWidth="1"
+          initial={{ r: 4, opacity: 0.9 }}
           animate={reduce ? undefined : { r: [4, 10, 4], opacity: [0.9, 0, 0.9] }}
           transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut" }}
         />

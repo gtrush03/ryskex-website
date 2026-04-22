@@ -308,7 +308,7 @@ export default function HomeHero({ className }: Props) {
               <g key={`sat${i}`}>
                 <ellipse cx={CX} cy={CY} rx={rx} ry={rx * 0.34} fill="none" stroke="#3B72DE" strokeWidth="0.3" opacity="0.22" transform={`rotate(${i * 40 - 25} ${CX} ${CY})`} />
                 <g transform={`rotate(${i * 40 - 25} ${CX} ${CY})`}>
-                  <motion.circle r="2.2" fill="#F4F5F8" animate={{ cx: [CX + rx, CX - rx, CX + rx], cy: [CY, CY, CY] }} transition={{ duration: 16 + i * 4, repeat: Infinity, ease: "linear" }} filter="url(#home-hero-glow)" />
+                  <motion.circle r="2.2" fill="#F4F5F8" initial={{ cx: CX + rx, cy: CY }} animate={{ cx: [CX + rx, CX - rx, CX + rx], cy: [CY, CY, CY] }} transition={{ duration: 16 + i * 4, repeat: Infinity, ease: "linear" }} filter="url(#home-hero-glow)" />
                 </g>
               </g>
             );
